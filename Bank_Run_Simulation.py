@@ -43,10 +43,10 @@ if st.button("Run Simulation and Calculate Results"):
 
     money_left_L = max(0, 10 * (N - run_results_L / L_L))
     money_left_R = max(0, 10 * (N - run_results_R / L_R))
-    gain_run_L = min(10, 10*N*L_L/run_results_L)
-    gain_run_R = min(10, 10*N*L_R/run_results_R)
-    gain_stay_L = money_left_L * R_L / stay_results_L
-    gain_stay_R = money_left_R * R_R / stay_results_R
+    gain_run_L = min(10, 10*N*L_L/run_results_L) if run_results_L > 0 else 0
+    gain_run_R = min(10, 10*N*L_R/run_results_R) if run_results_R > 0 else 0
+    gain_stay_L = money_left_L * R_L / stay_results_L if stay_results_L > 0 else 0
+    gain_stay_R = money_left_R * R_R / stay_results_R if stay_results_R > 0 else 0
 
     st.divider() # Visual line to separate inputs from results
     
@@ -77,3 +77,4 @@ if st.button("Run Simulation and Calculate Results"):
 else:
 
     st.info("Waiting for Depositor Decisions. Click the button above to see results.")
+
