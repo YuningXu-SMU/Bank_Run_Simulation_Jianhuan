@@ -11,8 +11,13 @@ sheet_url_R = "https://docs.google.com/spreadsheets/d/1ocSW_aNHoc4l3e0MWEfRAWvtB
 # Loading data
 df_L = pd.read_csv(sheet_url_L)
 df_R = pd.read_csv(sheet_url_R)
-input_L = df_L.iloc[:, 1]
-input_R = df_R.iloc[:, 1]
+
+def clean_inputs(series):
+    series = series.astype(str).str.strip().str.capitalize()
+    return series[series.isin(["Run", "Stay"])]
+
+input_L = clean_inputs(df_L.iloc[:, 1])
+input_R = clean_inputs(df_R.iloc[:, 1])
 
 st.sidebar.header("Global Economic Parameters")
 
@@ -77,4 +82,5 @@ if st.button("Run Simulation and Calculate Results"):
 else:
 
     st.info("Waiting for Depositor Decisions. Click the button above to see results.")
+
 
