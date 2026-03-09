@@ -41,8 +41,8 @@ if st.button("Run Simulation and Calculate Results"):
     run_results_R = results_R.value_counts().get("Run", 0)
     stay_results_R = results_R.value_counts().get("Stay", 0)
 
-    money_left_L = max(0, 10 * N - run_results_L * L_L)
-    money_left_R = max(0, 10 * N - run_results_R * L_R)
+    money_left_L = max(0, 10 * (N - run_results_L / L_L))
+    money_left_R = max(0, 10 * (N - run_results_R / L_R))
     gain_run_L = min(10, 10*N*L_L/run_results_L)
     gain_run_R = min(10, 10*N*L_R/run_results_R)
     gain_stay_L = money_left_L * R_L / stay_results_L
@@ -75,4 +75,5 @@ if st.button("Run Simulation and Calculate Results"):
         else:
             st.info("Run and Stay have the same expected gain for Group R.")
 else:
+
     st.info("Waiting for Depositor Decisions. Click the button above to see results.")
